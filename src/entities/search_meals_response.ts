@@ -1,6 +1,4 @@
-import { IngredientMeasure } from "./ingredient_measure";
-
-export interface Meal {
+export interface SearchMealApiResponse {
   idMeal: string;
   strMeal: string;
   strDrinkAlternate?: string;
@@ -10,9 +8,9 @@ export interface Meal {
   strMealThumb: string;
   strTags?: string;
   strYoutube?: string;
-  ingredients?: IngredientMeasure[];
   strSource?: string;
   strImageSource?: string;
   strCreativeCommonsConfirmed?: string;
   dateModified?: string;
+  [key: string]: string | undefined;
 }

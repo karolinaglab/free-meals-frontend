@@ -11,6 +11,7 @@
           'cards-item--notactive': chosenMealID && meal.idMeal !== chosenMealID,
         }"
       ></meal-card>
+      <meal-details-card v-if="chosenMealID" :meal="getMeal" />
     </div>
   </div>
 </template>
@@ -18,12 +19,13 @@
 <script lang="ts">
 import { Meal } from "@/entities/meal";
 import MealCard from "@/ui/components/meals-view/MealCard.vue";
+import MealDetailsCard from "@/ui/components/meals-view/MealDetailsCard.vue";
 import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 const meals = namespace("meals");
 
 @Component({
-  components: { MealCard },
+  components: { MealCard, MealDetailsCard },
 })
 export default class Home extends Vue {
   private chosenMealID = "";

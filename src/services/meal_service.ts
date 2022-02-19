@@ -3,7 +3,7 @@ import { API_URL } from "@/utils/config";
 import { SearchMealApiResponse } from "@/entities/search_meals_response";
 
 class MealService {
-  searchMealByName(mealName: string) {
+  searchMealsByName(mealName: string) {
     return axios.get<{ meals: SearchMealApiResponse[] }>(
       `${API_URL}/search.php`,
       {

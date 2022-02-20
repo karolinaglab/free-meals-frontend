@@ -28,10 +28,14 @@ class MealModule extends VuexModule {
   // mutations
   @Mutation
   public setMeals(meals: SearchMealApiResponse[]): void {
-    const convertedMeals: Meal[] = meals.map((meal) => {
-      return convertMealResponseToMealObject(meal);
-    });
-    this.meals = convertedMeals;
+    if (meals) {
+      const convertedMeals: Meal[] = meals.map((meal) => {
+        return convertMealResponseToMealObject(meal);
+      });
+      this.meals = convertedMeals;
+    } else {
+      this.meals = [];
+    }
   }
 
   @Mutation

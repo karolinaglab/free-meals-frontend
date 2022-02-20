@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="detailed-card">
     <iframe
       v-if="convertedYoutubeLink"
       width="400"
@@ -51,7 +51,7 @@ export default class MealDetailsCard extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.card {
+.detailed-card {
   display: flex;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;

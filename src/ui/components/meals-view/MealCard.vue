@@ -1,6 +1,28 @@
 <template>
   <div class="card" @click="$emit('click')">
     <img :src="meal.strMealThumb" :alt="meal.strMeal" />
+    <button
+      @click="addOrRemoveFromFavourites"
+      @mouseover="changeIconToFilled"
+      @mouseout="changeIconToEmpty"
+    >
+      <b-icon
+        v-if="iconFilled"
+        icon="suit-heart-fill"
+        aria-hidden="true"
+        class="card-icon"
+        font-scale="2"
+      >
+      </b-icon>
+      <b-icon
+        v-else
+        icon="suit-heart"
+        aria-hidden="true"
+        class="card-icon"
+        font-scale="2"
+      >
+      </b-icon>
+    </button>
     <p class="card-title">{{ meal.strMeal }}</p>
   </div>
 </template>
@@ -8,6 +30,8 @@
 <script lang="ts">
 import { Meal } from "@/entities/meal";
 import { Component, Vue, Prop } from "vue-property-decorator";
+import { namespace } from "vuex-class";
+const meals = namespace("meals");
 
 @Component({
   components: {},
@@ -15,17 +39,61 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 export default class MealCard extends Vue {
   @Prop({ required: true }) readonly meal!: Meal;
 
-  public test(): void {
-      console.log('elo')
+  private iconFilled = false;
+  private isFavourite = false;
+
+  @meals.Mutation
+  addMealToFavourites!: (meal: Meal) => void;
+
+  @meals.Mutation
+  removeFromFavourites!: (meal: Meal) => void;
+
+  @meals.Getter
+  public getFavouriteMeals!: Meal[];
+
+  public addOrRemoveFromFavourites(event: Event): void {
+    event.stopPropagation();
+    if (this.isFavourite) {
+      this.removeFromFavourites(this.meal);
+      this.isFavourite = false;
+      this.iconFilled = false;
+    } else {
+      this.addMealToFavourites(this.meal);
+      this.isFavourite = true;
+      this.iconFilled = true;
+    }
   }
- }
+
+  public changeIconToFilled(): void {
+    this.iconFilled = true;
+  }
+
+  public changeIconToEmpty(): void {
+    if (!this.isFavourite) {
+      this.iconFilled = false;
+    }
+  }
+
+  created(): void {
+    if (
+      this.getFavouriteMeals &&
+      this.getFavouriteMeals.filter((meal) => meal.idMeal === this.meal.idMeal)
+        .length > 0
+    ) {
+      this.isFavourite = true;
+      this.iconFilled = true;
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  width: 250px;
+  width: 270px;
   transition: transform 0.2s;
+  position: relative;
+  font-size: 14px;
 
   &:hover {
     transform: scale(1.04);
@@ -42,6 +110,17 @@ export default class MealCard extends Vue {
     letter-spacing: 2px;
     margin-top: 5px;
     padding-bottom: 5px;
+  }
+
+  button {
+    border: none;
+  }
+
+  .card-icon {
+    color: #ffffff;
+    position: absolute;
+    bottom: 20%;
+    right: 7%;
   }
 }
 </style>

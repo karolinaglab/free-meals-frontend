@@ -7,6 +7,9 @@ import { convertMealResponseToMealObject } from "../utils";
 @Module({ namespaced: true })
 class MealModule extends VuexModule {
   public meals: Meal[] = [];
+  public favouriteMeals: Meal[] = localStorage.getItem("favourites")
+    ? JSON.parse(localStorage.getItem("favourites") as string)
+    : [];
   public meal: Meal | null = null;
 
   // getters
@@ -16,6 +19,10 @@ class MealModule extends VuexModule {
 
   get getMeals(): Meal[] {
     return this.meals;
+  }
+
+  get getFavouriteMeals(): Meal[] {
+    return this.favouriteMeals;
   }
 
   // mutations
@@ -30,6 +37,20 @@ class MealModule extends VuexModule {
   @Mutation
   public setMeal(meal: SearchMealApiResponse): void {
     this.meal = convertMealResponseToMealObject(meal);
+  }
+
+  @Mutation
+  public addMealToFavourites(meal: Meal): void {
+    this.favouriteMeals.push(meal);
+    localStorage.setItem("favourites", JSON.stringify(this.favouriteMeals));
+  }
+
+  @Mutation
+  public removeFromFavourites(meal: Meal): void {
+    this.favouriteMeals = this.favouriteMeals.filter(
+      (favMeal) => favMeal.idMeal !== meal.idMeal
+    );
+    localStorage.setItem("favourites", JSON.stringify(this.favouriteMeals));
   }
 
   // actions

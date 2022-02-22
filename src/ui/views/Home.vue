@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="main-container">
     <div class="cards-container">
+      <meal-details-card v-if="chosenMealID" :meal="getMeal" />
       <meal-card
         class="cards-item"
         v-for="meal in getMeals"
@@ -11,7 +12,6 @@
           'cards-item--notactive': chosenMealID && meal.idMeal !== chosenMealID,
         }"
       ></meal-card>
-      <meal-details-card v-if="chosenMealID" :meal="getMeal" />
     </div>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default class Home extends Vue {
   public fetchAllByFirstLetter!: (mealFirstLetter: string) => Promise<void>;
 
   @meals.Action
-  public fetchMealsByName!: (mealName: string) => Promise<void>;
+  public fetchMealsByName!: (mealName?: string) => Promise<void>;
 
   @meals.Action
   public fetchMealByID!: (mealID: string) => Promise<void>;
@@ -55,7 +55,7 @@ export default class Home extends Vue {
   }
 
   created(): void {
-    this.fetchMealsByName("Soup");
+    this.fetchMealsByName();
   }
 }
 </script>

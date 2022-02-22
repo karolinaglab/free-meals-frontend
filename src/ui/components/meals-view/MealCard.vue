@@ -1,30 +1,32 @@
 <template>
   <div class="card" @click="$emit('click')">
-    <img class="card-img" :src="meal.strMealThumb" :alt="meal.strMeal" />
-    <div class="fav-wrapper">
-      <button
-        @click="addOrRemoveFromFavourites"
-        @mouseover="changeIconToFilled"
-        @mouseout="changeIconToEmpty"
-        class="fav-button"
-      >
-        <b-icon
-          v-if="iconFilled"
-          icon="suit-heart-fill"
-          aria-hidden="true"
-          class="fav-icon"
-          font-scale="2"
+    <div class="card-img-wrapper">
+      <img class="card-img" :src="meal.strMealThumb" :alt="meal.strMeal" />
+      <div class="card-fav-wrapper">
+        <button
+          @click="addOrRemoveFromFavourites"
+          @mouseover="changeIconToFilled"
+          @mouseout="changeIconToEmpty"
+          class="card-fav-button"
         >
-        </b-icon>
-        <b-icon
-          v-else
-          icon="suit-heart"
-          aria-hidden="true"
-          class="fav-icon"
-          font-scale="2"
-        >
-        </b-icon>
-      </button>
+          <b-icon
+            v-if="iconFilled"
+            icon="suit-heart-fill"
+            aria-hidden="true"
+            class="card-fav-icon"
+            font-scale="2"
+          >
+          </b-icon>
+          <b-icon
+            v-else
+            icon="suit-heart"
+            aria-hidden="true"
+            class="card-fav-icon"
+            font-scale="2"
+          >
+          </b-icon>
+        </button>
+      </div>
     </div>
     <p class="card-title">{{ meal.strMeal }}</p>
   </div>
@@ -95,7 +97,6 @@ export default class MealCard extends Vue {
   border-radius: 5px;
   width: 270px;
   transition: transform 0.2s;
-  position: relative;
   font-size: 14px;
 
   &:hover {
@@ -103,31 +104,35 @@ export default class MealCard extends Vue {
     cursor: pointer;
   }
 
-  .card-img {
-    border-radius: 5px 5px 0 0;
-    width: 100%;
-    height: 200px;
+  .card-img-wrapper {
+    position: relative;
+
+    .card-img {
+      border-radius: 5px 5px 0 0;
+      width: 100%;
+      height: 200px;
+    }
+
+    .card-fav-wrapper {
+      position: absolute;
+      bottom: 2%;
+      right: 5%;
+
+      .card-fav-button {
+        border: none;
+        background-color: transparent;
+      }
+
+      .card-fav-icon {
+        color: #ffffff;
+      }
+    }
   }
 
   .card-title {
     letter-spacing: 2px;
     margin-top: 5px;
     padding-bottom: 5px;
-  }
-
-  .fav-wrapper {
-    position: absolute;
-    bottom: 20%;
-    right: 7%;
-
-    .fav-button {
-      border: none;
-      background-color: transparent;
-    }
-
-    .fav-icon {
-      color: #ffffff;
-    }
   }
 }
 </style>

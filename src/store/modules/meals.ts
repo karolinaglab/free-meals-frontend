@@ -69,7 +69,7 @@ class MealModule extends VuexModule {
   }
 
   @Action({ rawError: true })
-  public async fetchMealsByName(name: string): Promise<void> {
+  public async fetchMealsByName(name = "Soup"): Promise<void> {
     try {
       const response = await MealService.searchMealsByName(name);
       const meals = response.data.meals;

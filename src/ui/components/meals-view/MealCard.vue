@@ -1,28 +1,31 @@
 <template>
   <div class="card" @click="$emit('click')">
-    <img :src="meal.strMealThumb" :alt="meal.strMeal" />
-    <button
-      @click="addOrRemoveFromFavourites"
-      @mouseover="changeIconToFilled"
-      @mouseout="changeIconToEmpty"
-    >
-      <b-icon
-        v-if="iconFilled"
-        icon="suit-heart-fill"
-        aria-hidden="true"
-        class="card-icon"
-        font-scale="2"
+    <img class="card-img" :src="meal.strMealThumb" :alt="meal.strMeal" />
+    <div class="fav-wrapper">
+      <button
+        @click="addOrRemoveFromFavourites"
+        @mouseover="changeIconToFilled"
+        @mouseout="changeIconToEmpty"
+        class="fav-button"
       >
-      </b-icon>
-      <b-icon
-        v-else
-        icon="suit-heart"
-        aria-hidden="true"
-        class="card-icon"
-        font-scale="2"
-      >
-      </b-icon>
-    </button>
+        <b-icon
+          v-if="iconFilled"
+          icon="suit-heart-fill"
+          aria-hidden="true"
+          class="fav-icon"
+          font-scale="2"
+        >
+        </b-icon>
+        <b-icon
+          v-else
+          icon="suit-heart"
+          aria-hidden="true"
+          class="fav-icon"
+          font-scale="2"
+        >
+        </b-icon>
+      </button>
+    </div>
     <p class="card-title">{{ meal.strMeal }}</p>
   </div>
 </template>
@@ -100,27 +103,31 @@ export default class MealCard extends Vue {
     cursor: pointer;
   }
 
-  img {
+  .card-img {
     border-radius: 5px 5px 0 0;
     width: 100%;
     height: 200px;
   }
 
-  p {
+  .card-title {
     letter-spacing: 2px;
     margin-top: 5px;
     padding-bottom: 5px;
   }
 
-  button {
-    border: none;
-  }
-
-  .card-icon {
-    color: #ffffff;
+  .fav-wrapper {
     position: absolute;
     bottom: 20%;
     right: 7%;
+
+    .fav-button {
+      border: none;
+      background-color: transparent;
+    }
+
+    .fav-icon {
+      color: #ffffff;
+    }
   }
 }
 </style>

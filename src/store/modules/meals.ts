@@ -12,7 +12,6 @@ class MealModule extends VuexModule {
     : [];
   public meal: Meal | null = null;
 
-  // getters
   get getMeal(): Meal | null {
     return this.meal;
   }
@@ -25,7 +24,6 @@ class MealModule extends VuexModule {
     return this.favouriteMeals;
   }
 
-  // mutations
   @Mutation
   public setMeals(meals: SearchMealApiResponse[]): void {
     if (meals) {
@@ -57,7 +55,6 @@ class MealModule extends VuexModule {
     localStorage.setItem("favourites", JSON.stringify(this.favouriteMeals));
   }
 
-  // actions
   @Action({ rawError: true })
   public async fetchAllByFirstLetter(mealFirstLetter: string): Promise<void> {
     try {

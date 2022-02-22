@@ -1,17 +1,33 @@
 <template>
   <div class="sidebar">
-    <ul class="filter-list">
-    </ul>
+    <h1>Category</h1>
+    <filters-box :filters="getAreas" />
+    <h1>Area</h1>
+    <filters-box :filters="getCategories" />
+    <h1>Tags</h1>
+    <filters-box :filters="getTags" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import FiltersBox from "@/ui/components/sidebar/FiltersBox.vue";
+import { namespace } from "vuex-class";
+const filters = namespace("filters");
 
 @Component({
-  components: {},
+  components: { FiltersBox },
 })
-export default class SideBar extends Vue {}
+export default class SideBar extends Vue {
+  @filters.Getter
+  public getCategories!: string[];
+
+  @filters.Getter
+  public getTags!: string[];
+
+  @filters.Getter
+  public getAreas!: string[];
+}
 </script>
 
 <style lang="scss" scoped>
@@ -24,7 +40,7 @@ export default class SideBar extends Vue {}
   top: 0; /* Stay at the top */
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 15px;
+  padding-top: 80px;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
 
   .filter-list {

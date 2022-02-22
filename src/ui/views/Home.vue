@@ -20,9 +20,10 @@
 import { Meal } from "@/entities/MealDetails";
 import MealCard from "@/ui/components/meals-view/MealCard.vue";
 import MealDetailsCard from "@/ui/components/meals-view/MealDetailsCard.vue";
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 const meals = namespace("meals");
+const filters = namespace("filters");
 
 @Component({
   components: { MealCard, MealDetailsCard },
@@ -45,12 +46,22 @@ export default class Home extends Vue {
   @meals.Getter
   public getMeal!: Meal | null;
 
+  @filters.Mutation
+  public setFilters!: (meals: Meal[]) => void;
+
   public getMealDetails(mealID: string): void {
     if (this.chosenMealID === mealID) {
       this.chosenMealID = "";
     } else {
       this.fetchMealByID(mealID);
       this.chosenMealID = mealID;
+    }
+  }
+
+  @Watch("getMeals")
+  mealsUpdated(): void {
+    if (this.getMeals) {
+      this.setFilters(this.getMeals);
     }
   }
 

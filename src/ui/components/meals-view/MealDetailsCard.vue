@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { Meal } from "@/entities/meal";
+import { Meal } from "@/entities/MealDetails";
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 
 @Component({

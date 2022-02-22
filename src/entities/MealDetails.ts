@@ -1,4 +1,4 @@
-import { IngredientMeasure } from "./ingredient_measure";
+import { IngredientMeasure } from "./IngredientMeasure";
 
 export interface Meal {
   idMeal: string;

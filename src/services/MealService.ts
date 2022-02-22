@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_URL } from "@/utils/config";
-import { SearchMealApiResponse } from "@/entities/search_meals_response";
+import { SearchMealApiResponse } from "@/entities/SearchMealResponse";
 
 class MealService {
   searchMealsByName(mealName: string) {

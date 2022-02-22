@@ -1,6 +1,6 @@
-import { Meal } from "@/entities/meal";
-import { SearchMealApiResponse } from "@/entities/search_meals_response";
-import MealService from "@/services/meal_service";
+import { Meal } from "@/entities/MealDetails";
+import { SearchMealApiResponse } from "@/entities/SearchMealResponse";
+import MealService from "@/services/MealService";
 import { VuexModule, Module, Mutation, Action } from "vuex-module-decorators";
 import { convertMealResponseToMealObject } from "../utils";
 

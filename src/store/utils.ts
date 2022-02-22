@@ -1,6 +1,6 @@
-import { IngredientMeasure } from "@/entities/ingredient_measure";
-import { Meal } from "@/entities/meal";
-import { SearchMealApiResponse } from "@/entities/search_meals_response";
+import { IngredientMeasure } from "@/entities/IngredientMeasure";
+import { Meal } from "@/entities/MealDetails";
+import { SearchMealApiResponse } from "@/entities/SearchMealResponse";
 
 export function convertMealResponseToMealObject(
   meal: SearchMealApiResponse

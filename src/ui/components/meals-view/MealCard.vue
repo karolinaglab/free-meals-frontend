@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Meal } from "@/entities/meal";
+import { Meal } from "@/entities/MealDetails";
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 const meals = namespace("meals");

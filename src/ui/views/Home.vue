@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Meal } from "@/entities/meal";
+import { Meal } from "@/entities/MealDetails";
 import MealCard from "@/ui/components/meals-view/MealCard.vue";
 import MealDetailsCard from "@/ui/components/meals-view/MealDetailsCard.vue";
 import { Component, Vue } from "vue-property-decorator";

@@ -1,4 +1,5 @@
 # free-meals-frontend
+Free Meals Frontend is application written for [Free Meal API](https://www.themealdb.com/api.php) - applications is not finished: to do is filter by category in the meals store module and improving the mobile version of the application. 
 
 ## Project setup
 ```
